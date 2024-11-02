@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from 'next/image';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect, useRef } from 'react';
 
 import CarCard from "@/components/CarCard";
 import Navbar from "@/components/Navbar";
+import CarTypeCard from "@/components/CarTypeCard";
+import { faInstagram, faSquareFacebook, faTiktok } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass, faChevronDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   const [selectedMake, setSelectedMake] = useState('Make');
@@ -92,7 +94,7 @@ export default function Home() {
                     </form>
                     <p className="w-full border-b-2 border-slate-300 text-[12px] font-medium mt-5 pb-1">ALL AVAILABLE MAKES</p>
                     <ul className="h-[300px] overflow-y-scroll">
-                      {['Toyota', 'Honda', 'Mitsubishi', 'Nissan', 'Suzuki', 'BMW', 'Mercedes', 'Wuling', 'Chery'].map(make => (
+                      {['Toyota', 'Honda', 'Mitsubishi', 'Nissan', 'Suzuki', 'BMW', 'Mercedes', 'Hyundai', 'KIA'].map(make => (
                         <li
                           key={make}
                           onClick={() => handleSelect('make', make)}
@@ -116,7 +118,11 @@ export default function Home() {
                 </button>
                 {yearDropdownOpen && (
                   <div id="yearDropdown" className="z-10 w-[280px] bg-white absolute top-[50px] border-slate-300 rounded-lg border p-3">
-                    <p className="w-full border-b-2 border-slate-300 text-[14px] font-medium mt-3 pb-2">CHOOSE RANGE</p>
+                    <form action="" className="flex items-center border-[1px] border-slate-500 rounded-lg px-5 py-2">
+                      <input type="text" className="w-full focus:outline-none" placeholder="Search Year" />
+                      <FontAwesomeIcon icon={faMagnifyingGlass} className="pl-2" />
+                    </form>
+                    <p className="w-full border-b-2 border-slate-300 text-[12px] font-medium mt-5 pb-1">CHOOSE RANGE</p>
                     <ul>
                       {['2020 - 2024', '2015 - 2019', '2010 - 2014', 'Below 2009'].map(yearRange => (
                         <li
@@ -142,9 +148,13 @@ export default function Home() {
                 </button>
                 {priceDropdownOpen && (
                   <div id="priceDropdown" className="z-10 w-[280px] bg-white absolute top-[50px] border-slate-300 rounded-lg border p-3">
-                    <p className="w-full border-b-2 border-slate-300 text-[14px] font-medium mt-3 pb-2">CHOOSE RANGE</p>
+                    <form action="" className="flex items-center border-[1px] border-slate-500 rounded-lg px-5 py-2">
+                      <input type="text" className="w-full focus:outline-none" placeholder="Search Price" />
+                      <FontAwesomeIcon icon={faMagnifyingGlass} className="pl-2" />
+                    </form>
+                    <p className="w-full border-b-2 border-slate-300 text-[12px] font-medium mt-5 pb-1">CHOOSE RANGE</p>
                     <ul>
-                      {['Above Rp. 1.000.000.000', 'Rp. 900.000.000 - Rp. 500.000.000', 'Rp. 400.000.000 - Rp. 200.000.000', 'Below Rp. 100.000.000'].map(priceRange => (
+                      {['Above Rp. 1 Billion', 'Rp. 900 Million - Rp. 500 Million', 'Rp. 400 Million - Rp. 200 Million', 'Below Rp. 100 Million'].map(priceRange => (
                         <li
                           key={priceRange}
                           onClick={() => handleSelect('price', priceRange)}
@@ -175,7 +185,56 @@ export default function Home() {
       </div>
 
       <div className="w-full px-[80px] py-5">
-        <h1 className="text-3xl font-bold">The most searched cars</h1>
+        <h1 className="text-3xl font-bold w-full pb-5">Browse car by type</h1>
+        <div className="w-full grid grid-cols-4 gap-5 mt-2">
+          <CarTypeCard
+            imageSrc="/assets/suv.svg"
+            title="SUV"
+            amount="8,000"
+            link="/"
+          />
+          <CarTypeCard
+            imageSrc="/assets/mpv.svg"
+            title="MPV"
+            amount="12,000"
+            link="/"
+          />
+          <CarTypeCard
+            imageSrc="/assets/sedan.svg"
+            title="Sedan"
+            amount="3,000"
+            link="/"
+          />
+          <CarTypeCard
+            imageSrc="/assets/ev.svg"
+            title="Electric"
+            amount="1,000"
+            link="/"
+          />
+        </div>
+      </div>
+
+      <div className="w-full px-[80px] py-20 flex gap-5">
+        <div className="w-2/4 bg-blue-100 rounded-lg py-20 px-[60px] flex justify-between">
+          <div className="w-4/6">
+            <h1 className="text-2xl font-bold w-4/6 mb-3">Are you looking for a car ?</h1>
+            <p className="text-[13px] font-medium text-neutral-500 leading-[24px] mb-7">We offer a wide selection of quality vehicles to help you find the perfect car that meets your needs and style.</p>
+            <Link href={"/"} className="py-3 px-4 bg-indigo-600 hover:bg-indigo-800 rounded-lg text-neutral-100 text-sm">Get Started <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="pl-1" /></Link>
+          </div>
+          <Image src={"/assets/buy.svg"} alt="buy" width={100} height={100} className="object-contain" />
+        </div>
+        <div className="w-2/4 bg-pink-100 rounded-lg py-20 px-[60px] flex justify-between">
+          <div className="w-4/6">
+            <h1 className="text-2xl font-bold w-4/6 mb-3">Do you want to sell a car ?</h1>
+            <p className="text-[13px] font-medium text-neutral-500 leading-[24px] mb-7">We make selling your car easy and hassle-free. Get a fair price and let us handle the details.</p>
+            <Link href={"/"} className="py-3 px-4 bg-black hover:bg-neutral-800 rounded-lg text-neutral-100 text-sm">Get Started <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="pl-1" /></Link>
+          </div>
+          <Image src={"/assets/sell.svg"} alt="sell" width={120} height={120} className="object-contain" />
+        </div>
+      </div>
+
+      <div className="w-full px-[80px] pt-5 pb-10">
+        <h1 className="text-3xl font-bold w-full border-b-2 border-neutral-200 pb-5">The most searched cars</h1>
         <div className="w-full grid grid-cols-4 gap-5 mt-7">
           <CarCard
             imageSrc="/assets/innova.jpg"
@@ -219,6 +278,50 @@ export default function Home() {
           />
         </div>
       </div>
-    </div >
+
+      <div className="w-full px-10 pt-10">
+        <div className="w-full bg-slate-100 py-10 px-20 rounded-xl grid grid-cols-4 gap-10">
+          <ul>
+            <li className="font-bold py-[8px]">About</li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>How it works</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Careers</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>About us</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Media</Link></li>
+          </ul>
+          <ul>
+            <li className="font-bold py-[8px]">Community</li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Against discrimination</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Invite friends</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Gift card</Link></li>
+          </ul>
+          <ul>
+            <li className="font-bold py-[8px]">Become a seller</li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Add your vehicle</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Business account</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Resource center</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Community</Link></li>
+          </ul>
+          <ul>
+            <li className="font-bold py-[8px]">Booking support</li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Help center</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Support</Link></li>
+            <li className="font-medium text-neutral-400 py-[8px] hover:text-neutral-600"><Link href={"/"}>Trust & safety</Link></li>
+          </ul>
+        </div>
+        <div className="flex justify-between items-center py-5 px-[60px]">
+          <div className="flex">
+            <h1 className="font-semibold">Term of Use</h1>
+            <p className="text-neutral-400 ml-2">&copy; 2024 MBenedictt. All rights reserved.</p>
+          </div>
+          <div className="flex gap-4">
+            <Link href={"https://www.instagram.com/mbenedictt/"}><FontAwesomeIcon icon={faInstagram} /></Link>
+            <Link href={"/"}><FontAwesomeIcon icon={faTiktok} /></Link>
+            <Link href={"/"}><FontAwesomeIcon icon={faSquareFacebook} /></Link>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   )
 }
