@@ -11,8 +11,15 @@ interface CarCardProps {
     fuel: string;
     transmission: string;
     price: string;
+    year: string;
     href: string;
 }
+
+const formatPrice = (price: string) => {
+    // Parse the string to an integer and format it
+    const parsedPrice = parseInt(price, 10);
+    return new Intl.NumberFormat('id-ID').format(parsedPrice);
+};
 
 const CarCard: React.FC<CarCardProps> = ({
     imageSrc,
@@ -22,6 +29,7 @@ const CarCard: React.FC<CarCardProps> = ({
     fuel,
     transmission,
     price,
+    year,
     href,
 }) => {
     return (
@@ -34,7 +42,7 @@ const CarCard: React.FC<CarCardProps> = ({
                 className="w-full h-[200px] object-cover rounded-t-lg"
             />
             <div className="p-5 py-5">
-                <h1 className="text-xl font-bold mb-1">{title}</h1>
+                <h1 className="text-xl font-bold mb-1">{title} - {year}</h1>
                 <p className="mb-3 truncate ...">{description}</p>
                 <ul className="flex justify-between items-center py-6">
                     <li className="flex flex-col justify-center items-center">
@@ -51,7 +59,7 @@ const CarCard: React.FC<CarCardProps> = ({
                     </li>
                 </ul>
                 <div className="flex justify-between items-center">
-                    <h1 className="font-semibold text-lg">{price}</h1>
+                    <h1 className="font-semibold text-lg">Rp. {formatPrice(price)}</h1>
                     <Link
                         className="group relative inline-block overflow-hidden border border-black px-3 py-1 focus:outline-none focus:ring"
                         href={href}

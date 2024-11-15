@@ -32,7 +32,7 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li className="font-semibold max-md:hidden">
-                    <Link href="/" className="relative group flex">
+                    <Link href="/cars" className="relative group flex">
                         <span className="group-hover:after:w-full after:w-0 after:h-0.5 after:bg-black after:absolute after:bottom-0 after:left-0 after:transition-all after:duration-300">
                             Buy Car
                         </span>
@@ -79,7 +79,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li className="font-medium text-2xl py-4">
-                            <Link href="/" className="relative group flex w-fit">
+                            <Link href="/cars" className="relative group flex w-fit">
                                 <span className="group-hover:after:w-full after:w-0 after:h-0.5 after:bg-black after:absolute after:bottom-0 after:left-0 after:transition-all after:duration-300">
                                     Buy Car
                                 </span>
